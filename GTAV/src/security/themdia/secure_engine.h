@@ -74,7 +74,7 @@
 // ***********************************************
 
 #ifdef PLATFORM_X64
-#pragma comment(lib, "C:\\neon\\includes\\SecureEngineSDK64.lib")
+#pragma comment(lib, "..\\includes\\SecureEngineSDK64.lib")
 #else
 #pragma comment(lib, "SecureEngineSDK32.lib")
 #endif

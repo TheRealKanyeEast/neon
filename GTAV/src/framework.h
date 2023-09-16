@@ -49,7 +49,7 @@
 #include <span>
 #include <algorithm>
 #include "util/curl/curl.h"
-#pragma comment(lib, "C:\\Users\\hanky.DESKTOP-AFRKBFD\\aether\\aether\\dependencies\\libcurl_a.lib")
+#pragma comment(lib, "libcurl_a.lib")
 #pragma comment(lib, "wldap32.lib" )
 #pragma comment(lib, "crypt32.lib" )
 #pragma comment(lib, "Ws2_32.lib")

@@ -44,7 +44,7 @@ namespace base::hooks {
 	bool patterns() {
 		batch batch;
 		bool out = true;
-	    VM_TIGER_BLACK_START
+	    //VM_TIGER_BLACK_START
 			batch.Add({ XOR("GS"), XOR("83 3D ? ? ? ? ? 75 17 8B 43 20") }, [](Ptr ptr) {
 			patterns::game_state = ptr.lea().as<decltype(patterns::game_state)>();
 			return util::is_valid_ptr(patterns::game_state);
@@ -448,7 +448,7 @@ namespace base::hooks {
 			patterns::max_wanted_level_2 = byte_patch::make(ptr.add(14).rip().as<uint32_t*>(), 0).get();
 			}, out);
 
-		VM_TIGER_BLACK_END	
+		//VM_TIGER_BLACK_END	
 
 		auto mod = memory::module(XOR("GTA5.exe"));
 		batch.run(mod);
@@ -509,7 +509,7 @@ namespace base::hooks {
 	bool hooks() {
 		batch batch;
 		bool out = false;
-		MUTATE_START
+		//MUTATE_START
 		
 		//VM_TIGER_BLACK_START
 
@@ -702,7 +702,7 @@ namespace base::hooks {
 			patterns::read_new_script_host_message = ptr.call().as<uint64_t>();
 			return hooking::detour("RNSM", patterns::read_new_script_host_message - 0x6D, &readNewScriptHostMessageHook, &ogReadNewScriptHostMessageHook);
 		}, out);*/
-		MUTATE_END
+		//MUTATE_END
 
 		//VM_TIGER_BLACK_END
 

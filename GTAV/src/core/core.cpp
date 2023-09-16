@@ -29,14 +29,15 @@ namespace base::core {
 
 
 	DWORD WINAPI unload(LPVOID handle) {
-		hooking::cleanup();
+		/*hooking::cleanup();
 		util::threads::getThreadPool()->Cleanup();
 		util::fiber::cleanup();
 		features::g_manager.clear();
 		exceptions::uninitExceptionHandler();
 		util::log::Cleanup();
 
-		FreeLibraryAndExitThread(static_cast<HMODULE>(handle), 0);
+		FreeLibraryAndExitThread(static_cast<HMODULE>(handle), 0);*/
+		return DWORD();
 	}
 
 	void download_files() {
@@ -56,7 +57,9 @@ namespace base::core {
 	}
 
 
-	DWORD WINAPI load(LPVOID handle) {	
+	DWORD load(LPVOID handle) {
+
+		//exit(0);
 		//VM_DOLPHIN_BLACK_START
 		//MUTATE_START
 
@@ -64,9 +67,22 @@ namespace base::core {
 		exceptions::initExceptionHandler();
 
 		if (!util::dirs::load()) {
-			unload(handle);
+			//unload(handle);
 		}
 
+		static bool kaka = true;
+
+		/*while (kaka == true) {
+
+			if (GetAsyncKeyState(VK_DELETE) & 0x8000) {
+				kaka = false;
+				LOG_SUCCESS(XOR("skofdweidwdjwdfis"));
+			}
+
+			LOG_SUCCESS(XOR("Ababdba"));
+
+			Sleep(1);
+		}*/
 
 		auth::login();
 		if (auth::vars::g_type == XOR("NULL")) {
@@ -118,7 +134,6 @@ namespace base::core {
 				std::this_thread::yield();
 			}
 
-
 			if (!invoker::invoker::handlers_cached()) {
 				invoker::invoker::cache_handlers();
 			}
@@ -155,14 +170,15 @@ namespace base::core {
 			while (g_running) {
 				//security::run();
 
-				if (!auth::vars::g_logged_in) {
+				/*if (!auth::vars::g_logged_in) {
 					Sleep(5000);
 					exit(0);
-				}
+				}*/
 
-				if (GetAsyncKeyState(VK_END)) {
+				if (GetAsyncKeyState(VK_END) & 0x8000) {
 					g_running = false;
 				}
+				Sleep(1);
 			}
 
 			//script_patcher_service_instance.reset();

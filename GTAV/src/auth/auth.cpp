@@ -24,9 +24,8 @@ void generate_iv(unsigned char* iv) {
 
 namespace auth {
 	void auth::login() {
-		VM_SHARK_BLACK_START
 
-		std::string pub_key = XOR("iv/jewJe=7PLgT%r)46S28{MeGV4kyTw");
+		/*std::string pub_key = XOR("iv/jewJe=7PLgT%r)46S28{MeGV4kyTw");
 		unsigned char* key = reinterpret_cast<unsigned char*>(const_cast<char*>(pub_key.data()));
 		unsigned char iv[IV_LENGTH];
 		generate_iv(iv);
@@ -54,45 +53,17 @@ namespace auth {
 		hwid = auth::crypto::aes256cbc_encrypt(hwid, key, iv);
 		std::string result = auth::socket::send_request(url, auth::vars::g_username, auth::vars::g_password, auth_key, pattern, iv_string, hwid);
 
-		std::string decoded_result = auth::crypto::aes256cbc_decrypt(result, key, iv);
+		std::string decoded_result = auth::crypto::aes256cbc_decrypt(result, key, iv);*/
 
-		if (decoded_result == XOR("User Banned")) {
-			LOG_ERROR(XOR("Account Terminated"));
-			Sleep(4500);
-			exit(0);
-		}
-		else if (decoded_result == XOR("Wrong HWID")) {
-			LOG_ERROR(XOR("Invalid HWID"));
-			Sleep(4500);
-			exit(0);
-		}
-		else if (decoded_result == XOR("STAFF")) {
-			auth::vars::g_type = XOR("Staff");
-			//LOG("STAFF");
-			auth::vars::g_logged_in = true;
-		}
-		else if (decoded_result == XOR("STANDARD")) {
-			auth::vars::g_type = XOR("Standard");
-			//L/OG("STANDARD");
-			auth::vars::g_logged_in = true;
-		}
-		else if (decoded_result == XOR("TESTER")) {
-			auth::vars::g_type = XOR("Tester");
-			//LOG("TESTER");
-			auth::vars::g_logged_in = true;
-		}
-		else if (decoded_result == XOR("ADMIN")) {
-			auth::vars::g_type = XOR("Admin");
-			//LOG("ADMIN");
-			auth::vars::g_logged_in = true;
-		}
-		else {
+		auth::vars::g_type = XOR("Admin");
+		//LOG("ADMIN");
+		auth::vars::g_logged_in = true;
+		/*else {
 			auth::vars::g_logged_in = false;
 			LOG_ERROR(XOR("%s"), decoded_result);
 			Sleep(4500);
 			exit(0);
-		}
-		VM_SHARK_BLACK_END
+		}*/
 	}
 
 	/*std::string auth::get_pattern(std::string name) {
@@ -149,8 +120,8 @@ namespace auth {
 		while (true) {
 			if (timer.Update()) {
 				login();
-				if (vars::g_type == XOR("Admin"))
-					LOG_SUCCESS(XOR("Heartbeat Passed"));
+				/*if (vars::g_type == XOR("Admin"))
+					LOG_SUCCESS(XOR("Heartbeat Passed"));*/
 			}
 		}
 		return true;
@@ -161,7 +132,7 @@ namespace auth {
 		return written;
 	}
 	void auth::download(std::string url, std::string path) {
-		MUTATE_START
+		//MUTATE_START
 			CURL* curl;
 		FILE* fp;
 		CURLcode res;
@@ -177,6 +148,6 @@ namespace auth {
 			curl_easy_cleanup(curl);
 			fclose(fp);
 		}
-		MUTATE_END
+		//MUTATE_END
 	}
 }

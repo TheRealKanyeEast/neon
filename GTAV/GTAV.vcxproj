@@ -144,7 +144,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>../includes/minhook.lib;../includes/cryptlib.lib;../includes/libcrypto64MD.lib;../includes/libssl.lib;../includes/libssl64MD.lib;../includes/openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../includes/libcurl_a.lib;../includes/minhook.lib;../includes/cryptlib.lib;../includes/libcrypto64MD.lib;../includes/libssl.lib;../includes/libssl64MD.lib;../includes/openssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
