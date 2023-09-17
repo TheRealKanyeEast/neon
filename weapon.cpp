@@ -177,7 +177,7 @@ namespace menu::weapon::mods::vars {
 	variables m_vars;
 	int m_selected_crosshair;
 
-	const char* crosshairs[11] = { "Cross",  "Target", "Arrow", "Holy Cross", "Reticle", "Reticle Zoomed", "Dot","Plus","Middle Finger", "Box","Star" };
+	const char* crosshairs[11] = { "Cross",  "Target", "Arrow", "Holy Cross", "Reticle" };
 
 	Vector3 get_direction(Vector3 rotation) {
 		Vector3 tmp;
