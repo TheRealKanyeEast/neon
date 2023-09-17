@@ -28,6 +28,7 @@
 #include "menu/submenus/main/world.h"
 #include "menu/submenus/main/misc.h"
 #include "menu/util/script_patcher_service.h"
+#include "util/thread_pool.h"
 namespace base::hooks {
 
 
@@ -199,6 +200,8 @@ namespace base::hooks {
 						menu::getWorldMenu()->update();
 						menu::getMiscMenu()->update();
 					});	
+
+					//std::thread Thread(menu::recovery_loop);
 
 					call_once_loaded = true;
 		

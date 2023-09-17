@@ -297,7 +297,7 @@ namespace base::hooks {
 
 		batch.Add({ XOR("NS_AITB"), XOR("48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 20 48 8B F2 48 8D 54 24") }, [](Ptr ptr) {
 			patterns::add_item_to_basket = ptr.as<decltype(patterns::add_item_to_basket)>();
-			//return hooking::detour("NS_AITB", patterns::add_item_to_basket, &addItemToBasketHook, &ogAddItemToBasketHook);
+			return hooking::detour("NS_AITB", patterns::add_item_to_basket, &addItemToBasketHook, &ogAddItemToBasketHook);
 		}, out);
 
 		batch.Add({ XOR("SEA"), XOR("E8 ? ? ? ? 66 83 7B 08 5B") }, [](Ptr ptr) {
@@ -780,17 +780,35 @@ namespace base::hooks {
 	}
 
 	bool hooks::addItemToBasketHook(uint64_t _this, i32* items) {
+		const auto returnValue = ogAddItemToBasketHook(_this, items);
 		if (_this) {
 			rage::netShopping::transactionNode* node = *(rage::netShopping::transactionNode**)(_this + 0x20);//m_next
-			while (node) {
+			/*while (node) {
 				if (node->m_transaction->m_category == (int)0xAE04310C) {
 					LOG_WARN(XOR("Blocked Arxan Report"));
 					return false;
 				}
 				
-			}
+			}*/
+			
+			rage::netShopping::netShopTransactionBasket* transact = node->m_transaction;
+
+			LOG("Added Item To Basket:\nTransaction Id: %i\nCategory: %lu\nAction Type Hash: %lu\nFlag: %i",
+				transact->m_transaction_id,
+				transact->m_category,
+				transact->m_action,
+				transact->m_target
+			);
+
+			auto a = *items;
+			auto a1 = items[1];
+			auto a2 = items[2];
+			auto a3 = items[3];
+			auto a4 = items[4];
+
+			LOG("a: %ld\na1: %ld\na2: %ld\na3: %ld\na4: %ld", a, a1, a2, a3, a4);
 		}
-		return ogAddItemToBasketHook(_this, items);
+		return returnValue;
 	}
 
 	int hooks::checkChatProfanityHook(uint64_t rcx, uint64_t input, uint64_t output) {

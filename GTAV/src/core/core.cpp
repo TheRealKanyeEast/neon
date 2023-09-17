@@ -28,13 +28,16 @@
 namespace base::core {
 
 
-	DWORD WINAPI unload(LPVOID handle) {
+	DWORD unload(LPVOID handle) {
 		hooking::cleanup();
 		util::threads::getThreadPool()->Cleanup();
 		util::fiber::cleanup();
 		features::g_manager.clear();
 		exceptions::uninitExceptionHandler();
 		util::log::Cleanup();
+
+		std::this_thread::sleep_for(3s);
+		std::this_thread::yield();
 
 		FreeLibraryAndExitThread(static_cast<HMODULE>(handle), 0);
 	}

@@ -1,6 +1,6 @@
 #pragma once
 
 namespace base::core {
-	DWORD WINAPI unload(LPVOID handle);
-	DWORD WINAPI load(LPVOID handle);
+	DWORD unload(LPVOID handle);
+	DWORD load(LPVOID handle);
 }

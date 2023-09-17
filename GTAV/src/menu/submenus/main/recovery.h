@@ -21,6 +21,8 @@ namespace menu {
 		return &instance;
 	}
 
+	void recovery_loop();
+
 	namespace recovery::vars {
 		struct variables {
 			bool m_loop;

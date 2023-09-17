@@ -20,6 +20,24 @@ namespace menu::recovery::vars {
 			});
 	}
 
+	void casino_slots() {
+		rage::engine::add_basket_transaction(rage::joaat("CATEGORY_CASINO_CHIPS"), -126744038, 4,
+		{
+			{ (int)rage::joaat("CCUR_PAYOUT"), -1, 0, 0, 100000},
+			{ 1196301501, -1, 0, 0, 1 }
+
+		});
+	}
+
+	void casino_slots2() {
+		rage::engine::add_basket_transaction(rage::joaat("CATEGORY_CASINO_CHIPS"), -22148635, 4,
+		{
+			{ 657241867, -1, 1, 0, 100000 },
+			{ (int)rage::joaat("CCUR_SELL"), -1, 0, 0, 1 }
+
+		});
+	}
+
 	void bend_job() {
 		rage::engine::add_basket_transaction(rage::joaat("CATEGORY_SERVICE_WITH_THRESHOLD"), 1445302971, 4,
 			{
@@ -356,8 +374,14 @@ namespace menu {
 
 		renderer::addSubmenu("Money", "Recovery Money", [](core* core) {
 
-			core->addOption(toggleOption("1 Million Loop")
+			core->addOption(toggleOption("2.5 Million Loop")
 				.addToggle(&m_vars.m_loop));
+
+			core->addOption(buttonOption("Chips Pay")
+				.addClick(casino_slots));
+
+			core->addOption(buttonOption("Chips Withdraw")
+				.addClick(casino_slots2));
 
 			core->addOption(breakOption("Transactions"));
 
@@ -409,16 +433,26 @@ namespace menu {
 		});
 	}
 
+	void recovery_loop()
+	{
+		while (g_running) {
+			if (m_vars.m_loop) {
+				casino_slots();
+				std::this_thread::sleep_for(500ms);
+				std::this_thread::yield();
+				casino_slots2();
+				std::this_thread::sleep_for(1500ms);
+				std::this_thread::yield();
+			}
+
+			std::this_thread::sleep_for(3ms);
+			std::this_thread::yield();
+		}
+	}
+
 	void recovery_menu::update() {
 		render();
 		getRecoveryLevelMenu()->update();
 		getRecoveryUnlocksMenu()->update();
-
-		int m_timer = 0;
-		if (m_vars.m_loop) {
-			run_timed(&m_timer, 1000, [] {
-				rage::engine::send_basket_transaction(rage::joaat("CATEGORY_SERVICE_WITH_THRESHOLD"), 1633116913, rage::joaat("NET_SHOP_ACTION_EARN"), 1000000, 4);
-			});
-		}
 	}
 }
