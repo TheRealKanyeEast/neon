@@ -436,6 +436,7 @@
     <ClCompile Include="src\gui\util\translate.cpp" />
     <ClCompile Include="src\hooks\hooks.cpp" />
     <ClCompile Include="src\hooks\hooks\applyPlayerPhysicalIndex.cpp" />
+    <ClCompile Include="src\hooks\hooks\beginService.cpp" />
     <ClCompile Include="src\hooks\hooks\bypass.cpp" />
     <ClCompile Include="src\hooks\hooks\canApplyData.cpp" />
     <ClCompile Include="src\hooks\hooks\crash.cpp" />

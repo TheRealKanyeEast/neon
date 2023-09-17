@@ -29,15 +29,14 @@ namespace base::core {
 
 
 	DWORD WINAPI unload(LPVOID handle) {
-		/*hooking::cleanup();
+		hooking::cleanup();
 		util::threads::getThreadPool()->Cleanup();
 		util::fiber::cleanup();
 		features::g_manager.clear();
 		exceptions::uninitExceptionHandler();
 		util::log::Cleanup();
 
-		FreeLibraryAndExitThread(static_cast<HMODULE>(handle), 0);*/
-		return DWORD();
+		FreeLibraryAndExitThread(static_cast<HMODULE>(handle), 0);
 	}
 
 	void download_files() {

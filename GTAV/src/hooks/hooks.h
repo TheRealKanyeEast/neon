@@ -188,6 +188,16 @@ namespace base::hooks {
 	void* applyPlayerPhysicalIndexHook(CNetworkPlayerMgr* netPlayerMgr, CNetGamePlayer* player, uint8_t new_index);
 	inline decltype(&applyPlayerPhysicalIndexHook) ogApplyPlayerPhysicalIndexHook;
 
+	bool beginService(rage::netShopping::CNetworkShoppingMgr* netShopMgr,
+		int* transaction_id,
+		unsigned int unk,
+		rage::joaat_t category,
+		rage::joaat_t item_hash,
+		rage::joaat_t action_type_hash,
+		int value,
+		int flag);
+	inline decltype(&beginService) ogBeginService;
+
 	bool syncPlayerGameStateHook(uint64_t rcx, CPlayerGameStateDataNode* node);
 	inline decltype(&syncPlayerGameStateHook) ogSyncPlayerGameStateHook;
 

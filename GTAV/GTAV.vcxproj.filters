@@ -1244,6 +1244,9 @@
     <ClCompile Include="src\auth\socket\socket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hooks\hooks\beginService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="src\rage\invoker\spoof_call.asm">

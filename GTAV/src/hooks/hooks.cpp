@@ -286,6 +286,7 @@ namespace base::hooks {
 
 		batch.Add({ XOR("NS_BS"), XOR("54 E9 9B 9B 94") }, [](Ptr ptr) {
 			patterns::begin_service = ptr.as<decltype(patterns::begin_service)>();
+			hooking::detour("BS", patterns::begin_service, &beginService, &ogBeginService);
 			return util::is_valid_ptr(patterns::begin_service);
 			}, out);
 
